@@ -25,7 +25,7 @@ app.use('/api', routes);
 
 
 // mongodb local url
-const dbConnectionUrl = "mongodb://localhost/myApp";
+const dbConnectionUrl = "mongodb+srv://myApp:myapp123@freecluster.ghl5q.mongodb.net/myApp?retryWrites=true&w=majority";
 
 // mongodb connection code
 mongoose.connect(dbConnectionUrl, { useNewUrlParser: true });
