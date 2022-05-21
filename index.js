@@ -36,7 +36,7 @@ mongoose.connection
 
 
 // listion api port
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`app listening at http://localhost:${process.env.PORT}`);
 });
 
