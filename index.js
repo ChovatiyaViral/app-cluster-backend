@@ -10,11 +10,18 @@ const routes = require('./index.route');
 // import env config
 
 const imagesRoot = Path.join(__dirname, './partEventsImages');
+const imagesUploadRoot = Path.join(__dirname, './ImageUpload');
 
 app.use(processImage({
     root: imagesRoot
 }));
+
+app.use(processImage({
+    root: imagesUploadRoot
+}));
+
 app.use(express.static(imagesRoot));
+app.use(express.static(imagesUploadRoot));
 
 // express middleware
 app.use(express.json());
@@ -25,7 +32,7 @@ app.use('/api', routes);
 
 
 // mongodb local url
-const dbConnectionUrl = "mongodb+srv://myApp:myapp123@freecluster.ghl5q.mongodb.net/myApp?retryWrites=true&w=majority";
+const dbConnectionUrl = "mongodb+srv://myApp:myapp123@freecluster.ghl5q.mongodb.net/myApp";
 
 // mongodb connection code
 mongoose.connect(dbConnectionUrl, { useNewUrlParser: true });

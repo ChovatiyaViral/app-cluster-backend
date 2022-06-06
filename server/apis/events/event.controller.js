@@ -1,4 +1,5 @@
 const Events = require('./event.model');
+const eventHtmlTemplate = require('../../../htmlTemplate/eventTemplate.js')
 
 const getEventData = async (req, res, next) => {
     try {
@@ -86,5 +87,24 @@ const editEvent = async (req, res, next) => {
     }
 }
 
+const eventHTML = async (req, res, next) => {
+    try {
+        // console.log('req --->', req.body);
+        // const html = eventHtmlTemplate
 
-module.exports = { getEventData, createEvent, deleteEvent, editEvent }
+        // console.log('html',html);
+        res.send([])
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+module.exports = {
+    getEventData,
+    createEvent,
+    deleteEvent,
+    editEvent,
+    eventHTML
+}

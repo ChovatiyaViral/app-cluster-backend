@@ -5,6 +5,9 @@ const auth = require('../../../middleware/checkAuthentication');
 
 const router = express.Router();
 
+router.route('/html')
+    .post(EventCtrl.eventHTML)
+
 router.route('/edit/:id')
     .put(auth, EventCtrl.editEvent)
 
