@@ -1,5 +1,6 @@
 const Events = require('./event.model');
-const eventHtmlTemplate = require('../../../htmlTemplate/eventTemplate.js')
+var path = require('path');
+
 
 const getEventData = async (req, res, next) => {
     try {
@@ -89,11 +90,12 @@ const editEvent = async (req, res, next) => {
 
 const eventHTML = async (req, res, next) => {
     try {
+        res.sendFile(path.resolve('htmlTemplate/eventTemplate.html'));
         // console.log('req --->', req.body);
         // const html = eventHtmlTemplate
 
         // console.log('html',html);
-        res.send([])
+        // res.send([])
 
     } catch (error) {
         next(error)
