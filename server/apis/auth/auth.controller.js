@@ -59,7 +59,6 @@ const userLogin = async (req, res, next) => {
         }
 
         const user = await Registration.findOne({ email });
-        console.log("user", user);
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign(
                 { user_id: user._id, email },
