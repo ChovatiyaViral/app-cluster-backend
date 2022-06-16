@@ -1,3 +1,4 @@
+const { sendMail } = require('../../../MailSend');
 const PartyEvents = require('./partyEvents.model');
 require('dotenv').config();
 const browseURL = `http://localhost:${process.env.PORT}/`;
@@ -24,7 +25,7 @@ const createPartyEvents = async (req, res, next) => {
         })
 
         const partyEventsData = await partyEvents.save();
-
+        sendMail(req.body)
         res.status(200).json(partyEvents)
 
     } catch (e) {
