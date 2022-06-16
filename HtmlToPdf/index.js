@@ -17,6 +17,14 @@ const getEventHtmlPdf = async (eventData) => {
 
 };
 
+const getEventHtmlFile = async (data) => {
+    let EventHtmlTemplate = await EventHtml.getHtml(data)
+    return {
+        EventHtmlTemplate
+    }
+}
+
 module.exports = {
-    getEventHtmlPdf
+    getEventHtmlPdf,
+    getEventHtmlFile
 }
