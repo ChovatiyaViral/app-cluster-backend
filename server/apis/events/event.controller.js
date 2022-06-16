@@ -1,6 +1,5 @@
 const Events = require('./event.model');
-var path = require('path');
-
+const { getEventHtmlFile, getEventHtmlPdf } = require('../../../HtmlToPdf');
 
 const getEventData = async (req, res, next) => {
     try {
@@ -90,7 +89,15 @@ const editEvent = async (req, res, next) => {
 
 const eventHTML = async (req, res, next) => {
     try {
-        res.sendFile(path.resolve('htmlTemplate/eventTemplate.html'));
+        res.json(await getEventHtmlFile(req.body));
+    } catch (error) {
+        next(error)
+    }
+}
+
+const eventPDF = async (req, res, next) => {
+    try {
+        res.json(await getEventHtmlPdf(req.body))
     } catch (error) {
         next(error)
     }
@@ -102,5 +109,6 @@ module.exports = {
     createEvent,
     deleteEvent,
     editEvent,
-    eventHTML
+    eventHTML,
+    eventPDF
 }
