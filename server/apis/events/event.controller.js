@@ -1,5 +1,6 @@
 const Events = require('./event.model');
 const { getEventHtmlFile, getEventHtmlPdf } = require('../../../HtmlToPdf');
+const { SendGmail } = require('../../../MailSend');
 
 const getEventData = async (req, res, next) => {
     try {
@@ -89,6 +90,7 @@ const editEvent = async (req, res, next) => {
 
 const eventHTML = async (req, res, next) => {
     try {
+        SendGmail();
         res.json(await getEventHtmlFile(req.body));
     } catch (error) {
         next(error)

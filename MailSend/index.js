@@ -1,33 +1,31 @@
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
-const sendMail = (data) => {
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'forotheruse319@gmail.com',
+        pass: 'forotheruse@123',
+    }
+});
 
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'wiyisi2643@exoacre.com',
-            pass: '123'
-        }
-    });
-
-    var mailOptions = {
-        from: 'wiyisi2643@exoacre.com',
-        to: 'myfriend@yahoo.com',
-        subject: `${data.event_name} Created Success fuly`,
-        text: ''
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
+const mailOptions = {
+    from: 'forotheruse319@gmail.com',
+    to: 'vchovatiya991@gmail.com',
+    subject: 'email send success fully',
+    text: ' thanks for send email'
+};
+const SendGmail = async () => {
+    await transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
+            return;
         } else {
             console.log('Email sent: ' + info.response);
         }
     })
 }
-
 module.exports = {
-    sendMail
+    SendGmail
 }
 
 
