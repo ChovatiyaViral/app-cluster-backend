@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types;
 
 const PartyEventsSchema = new mongoose.Schema({
     poster_img: {
@@ -33,9 +34,10 @@ const PartyEventsSchema = new mongoose.Schema({
         type: Object,
         required: false
     },
-    is_like: {
-        type: Boolean,
-    }
+    is_like: [{
+        type: ObjectId,
+        ref: "user"
+    }]
 });
 
 module.exports = mongoose.model('PartyEvents', PartyEventsSchema);

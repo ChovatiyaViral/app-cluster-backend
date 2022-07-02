@@ -20,7 +20,7 @@ const createPartyEvents = async (req, res, next) => {
             poster_img: req.files.poster_img[0].originalname,
             company_name,
             sponsor,
-            is_like
+            is_like: []
         })
 
         const partyEventsData = await partyEvents.save();
@@ -52,18 +52,15 @@ const getAllPartyEventsData = async (req, res, next) => {
 
 const partyLike = async (req, res, next) => {
     try {
-        const { id } = req.body;
-        if (!(id)) {
-            res.status(400).send({ error: "please enter valid id" });
-        }
-
-        PartyEvents.findByIdAndUpdate(id, { is_like: true }, (err) => {
+        PartyEvents.findByIdAndUpdate(req.body.id, {
+            $push: { is_like: req.body.userId }
+        }, { new: true }).exec((err, result) => {
             if (err) {
-                res.status(400).send({ error: "Data Is Not Updated" });
+                return res.status(422).json({ error: err })
+            } else {
+                res.json(result)
             }
         });
-
-        res.status(200).send("party like successfully")
     } catch (e) {
         next(e)
     }
@@ -72,19 +69,15 @@ const partyLike = async (req, res, next) => {
 
 const partyDisLike = async (req, res, next) => {
     try {
-        const { id } = req.body;
-        if (!(id)) {
-            res.status(400).send({ error: "please enter valid id" });
-        }
-
-
-        PartyEvents.findByIdAndUpdate(id, { is_like: false }, (err) => {
+        PartyEvents.findByIdAndUpdate(req.body.id, {
+            $pull: { is_like: req.body.userId }
+        }, { new: true }).exec((err, result) => {
             if (err) {
-                res.status(400).send({ error: "Data Is Not Updated" });
+                return res.status(422).json({ error: err })
+            } else {
+                res.json(result)
             }
         });
-
-        res.status(200).send("party disLike successfully")
     } catch (e) {
         next(e)
     }
