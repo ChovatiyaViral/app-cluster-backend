@@ -17,9 +17,12 @@ router.route('/edit/:id')
 router.route('/delete/:id')
     .delete(auth, EventCtrl.deleteEvent)
 
-router.route('/')
-    .get(auth, EventCtrl.getEventData)
+router.route('/add')
     .post(auth, EventCtrl.createEvent);
+
+router.route('/')
+    .post(auth, EventCtrl.getEventData)
+
 
 
 module.exports = router;

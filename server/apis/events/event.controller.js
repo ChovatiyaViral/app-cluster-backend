@@ -1,11 +1,14 @@
 const Events = require('./event.model');
 const { getEventHtmlFile, getEventHtmlPdf } = require('../../../HtmlToPdf');
 const email = require('../../../MailSend');
+const { pagination } = require("../../../utility")
 
 const getEventData = async (req, res, next) => {
     try {
-        const eventData = await Events.find();
-        res.status(200).send(eventData)
+        const totalData = await Events.count();
+
+        const eventData = await Events.find().skip((req.body.page - 1) * 5).limit(req.body.limite);
+        res.status(200).send({ totalData, eventData })
     } catch (err) {
         next(err);
     }
